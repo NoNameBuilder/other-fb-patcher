@@ -19,16 +19,24 @@ jobs:
     
     - name: Fetch necessary packages
       run: |
+         sudo apt update
          sudo apt install git wget lz4 tar openssl python3 -y
          
     - name: Download recovery image from URL
       run: |
-         wget ${{github.event.inputs.image_url}}
+         wget -O recovery.img ${{ github.event.inputs.image_url }}
+
+    - name: Check if recovery.img exists
+      run: |
+         if [ ! -f "recovery.img" ]; then
+           echo "Error: No recovery.img found!"
+           exit 1
+         fi
 
     - name: Start patching script
       run: |
-         chmod a+x magiskboot
-         chmod a+x patcher-minimal
+         chmod +x magiskboot
+         chmod +x patcher-minimal
          ./patcher-minimal
 
     - name: Upload patched image files
