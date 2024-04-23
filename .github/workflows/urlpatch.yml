@@ -5,7 +5,7 @@ on:
     inputs:
       image_url:
         description: 'Recovery Image URL'
-        default: 'https://transfer.sh/<file-id>/<file>.img'
+        default: 'https://www.mediafire.com/file/mgnyunol0ivq3f4/recovery.img/file#'
         required: true
         type: string
 
